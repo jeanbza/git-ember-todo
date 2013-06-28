@@ -1,7 +1,23 @@
-input {
-	display: block !important;
+/* line 1, ../sass/app.sass */
+body {
+  padding-top: 10%;
+  padding-right: 25%;
+  padding-left: 25%;
 }
 
-.addNameArea {
-	padding-top: 10px;
+/* line 7, ../sass/app.sass */
+body .todo-input, body .btn-submit-todo {
+  height: 40px;
+}
+
+/* line 10, ../sass/app.sass */
+body .todo-input {
+  width: 93%;
+  float: left;
+  margin-right: 2%;
+}
+
+/* line 16, ../sass/app.sass */
+body .btn-submit-todo {
+  width: 5%;
 }
