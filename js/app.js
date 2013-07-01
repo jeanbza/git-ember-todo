@@ -1,3 +1,5 @@
+// INIT
+
 window.App = Ember.Application.create();
 
 // MODEL
