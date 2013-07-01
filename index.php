@@ -17,7 +17,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<legend>Create A TODO</legend>
-					{{view Ember.TextField valueBinding="todoInput" class="todo-input" placeholder="Enter a todo"}}
+					{{view App.TodoInput action="addTodo" valueBinding="todoInput" class="todo-input" placeholder="Enter a todo"}}
 					<button {{action addTodo}} class="btn btn-primary btn-submit-todo">
 						<i class="icon-ok icon-white"></i>
 					</button>
@@ -30,13 +30,16 @@
 						<div class="span3">
 							{{todoItem.title}}
 						</div>
-						<div class="span3">
-							{{todoItem.content}}
-						</div>
-
 						{{#if todoItem.clicked}}
+							<div class="span3">
+								{{todoItem.content}}
+							</div>
 							<div class="span6">
 								Some other stuff.
+							</div>
+						{{else}}
+							<div class="span9">
+								{{todoItem.content}}
 							</div>
 						{{/if}}
 					{{/view}}

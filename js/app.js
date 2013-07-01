@@ -3,8 +3,8 @@ window.App = Ember.Application.create();
 // MODEL
 
 App.TodoItem = Ember.View.extend({
-	title: "asd",
-	content: "asd",
+	title: "",
+	content: "",
 	clicked: false,
 	click: function() {
 		this.set('clicked', !this.clicked);
@@ -19,16 +19,24 @@ App.TodoItems = Ember.ArrayController.create({
 	}
 });
 
+// VIEW
+
+App.TodoInput = Ember.TextField.extend({
+	didInsertElement: function() {
+		this.$().focus();
+	}
+});
+
 // CONTROLLER
 
 App.ApplicationController = Ember.Controller.extend({
 	init: function() {
 		for(x = 0; x < 5; x++) {
-			App.TodoItems.addTodo("Title "+x, "Content "+x);
+			App.TodoItems.addTodo("TODO "+x, "Content "+x+" - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tempor sem.");
 		}
 	},
 
 	addTodo: function() {
-		App.TodoItems.addTodo(this.get("todoInput"), "No content");
+		App.TodoItems.addTodo(this.get("todoInput"), "No content.");
 	}
 });
