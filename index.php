@@ -17,17 +17,19 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<legend>Create A TODO</legend>
-					<input class="todo-input" type="text" placeholder="Add a TODO">
-					<button class='btn btn-primary btn-submit-todo'><i class='icon-ok icon-white'></i></button>
+						{{view Ember.TextField valueBinding="todoInput" class="todo-input" placeholder="Enter a todo"}}
+						<button {{action addTodo}} class="btn btn-primary btn-submit-todo">
+							<i class="icon-ok icon-white"></i>
+						</button>
 				</div>
 			</div>
-			{{#each someItem in someItems}}
+			{{#each todoItem in App.TodoItems.items}}
 				<div class="row-fluid">
 					<div class="span6">
-						{{someItem}}
+						{{todoItem.title}}
 					</div>
 					<div class="span6">
-						{{someItem}}
+						{{todoItem.content}}
 					</div>
 				</div>
 			{{/each}}
