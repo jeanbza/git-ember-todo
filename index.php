@@ -27,12 +27,18 @@
 			{{#each todoItem in App.TodoItems.items}}
 				<div class="row-fluid">
 					{{#view todoItem}}
-						<div class="span6">
+						<div class="span3">
 							{{todoItem.title}}
 						</div>
-						<div class="span6">
+						<div class="span3">
 							{{todoItem.content}}
 						</div>
+
+						{{#if todoItem.clicked}}
+							<div class="span6">
+								Some other stuff.
+							</div>
+						{{/if}}
 					{{/view}}
 				</div>
 			{{/each}}

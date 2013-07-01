@@ -5,8 +5,9 @@ window.App = Ember.Application.create();
 App.TodoItem = Ember.View.extend({
 	title: "asd",
 	content: "asd",
+	clicked: false,
 	click: function() {
-		alert(this.title);
+		this.set('clicked', !this.clicked);
 	}
 });
 
