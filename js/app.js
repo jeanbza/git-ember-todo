@@ -2,9 +2,12 @@ window.App = Ember.Application.create();
 
 // MODEL
 
-App.TodoItem = Ember.Object.extend({
-	title: "",
-	content: ""
+App.TodoItem = Ember.View.extend({
+	title: "asd",
+	content: "asd",
+	click: function() {
+		alert(this.title);
+	}
 });
 
 App.TodoItems = Ember.ArrayController.create({
