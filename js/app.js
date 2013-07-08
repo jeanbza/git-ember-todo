@@ -40,5 +40,6 @@ App.ApplicationController = Ember.Controller.extend({
 
 	addTodo: function() {
 		App.TodoItems.addTodo(this.get("todoInput"), "No content.");
+		this.set("todoInput", "");
 	}
 });
