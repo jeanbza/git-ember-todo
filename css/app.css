@@ -21,3 +21,34 @@ body .todo-input {
 body .btn-submit-todo {
   width: 5%;
 }
+
+/* line 19, ../sass/app.sass */
+.tall-row {
+  height: 40px;
+}
+/* line 21, ../sass/app.sass */
+.tall-row button {
+  height: 100%;
+  background-color: white;
+  border: none;
+}
+/* line 25, ../sass/app.sass */
+.tall-row .leftmost-span {
+  margin-left: 0 !important;
+}
+/* line 27, ../sass/app.sass */
+.tall-row .edit-todo-input {
+  height: 75%;
+  width: 90%;
+  padding: 5px;
+}
+
+/* line 32, ../sass/app.sass */
+.right-align {
+  text-align: right;
+}
+
+/* line 35, ../sass/app.sass */
+span {
+  display: block;
+}

@@ -16,8 +16,11 @@
 		<div class="container-fluid">
 			<div class="row-fluid">
 				<div class="span12">
-					<legend>Create A TODO</legend>
-					{{view App.TodoInput action="addTodo" valueBinding="todoInput" class="todo-input" placeholder="Enter a todo"}}
+					<legend>
+						<span>Create A TODO</span>
+						<span><small>Note: double click to edit</small></span>
+					</legend>
+					{{view App.InputField action="addTodo" class="todo-input" placeholder="Enter a todo" valueBinding="todoInput"}}
 					<button {{action addTodo}} class="btn btn-primary btn-submit-todo">
 						<i class="icon-ok icon-white"></i>
 					</button>
@@ -25,23 +28,33 @@
 			</div>
 
 			{{#each todoItem in App.TodoItems.items}}
-				<div class="row-fluid">
+				<div class="row-fluid tall-row">
 					{{#view todoItem}}
-						<div class="span3">
-							{{todoItem.title}}
+						<div class="span3 leftmost-span">
+							{{#view todoItem.title}}
+								{{#if todoItem.title.isEditing}}
+									{{view App.InputField valueBinding="todoItem.title.content" class="edit-todo-input"}}
+								{{else}}
+									{{todoItem.title.content}}
+								{{/if}}
+							{{/view}}
 						</div>
-						{{#if todoItem.clicked}}
-							<div class="span3">
-								{{todoItem.content}}
-							</div>
-							<div class="span6">
-								Some other stuff.
-							</div>
-						{{else}}
-							<div class="span9">
-								{{todoItem.content}}
-							</div>
-						{{/if}}
+
+						<div class="span8">
+							{{#view todoItem.content}}
+								{{#if todoItem.content.isEditing}}
+									{{view App.InputField valueBinding="todoItem.content.content" class="edit-todo-input"}}
+								{{else}}
+									{{todoItem.content.content}}
+								{{/if}}
+							{{/view}}
+						</div>
+
+						<div class="span1 right-align">
+							<button {{action removeTodo todoItem}}>
+								<i class="icon-trash"></i>
+							</button>
+						</div>
 					{{/view}}
 				</div>
 			{{/each}}
