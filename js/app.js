@@ -21,12 +21,13 @@ App.TodoItems = Ember.ArrayController.create({
 App.Popover = Ember.View.extend({
 	parentSelector: '',
 	contentSelector: '',
+
 	didInsertElement: function () {
 		var self = this;
 		$(self.parentSelector).popover({
 			html: true,
 			title: self.title,
-			placement: 'right',
+			placement: 'left',
 			trigger: 'hover',
 			content: function() {
 				var $content = $(self.contentSelector);
@@ -34,6 +35,7 @@ App.Popover = Ember.View.extend({
 			}
 		});
 	},
+
 	close: function() {
 		$(this.parentSelector).popover('hide');
 	}
@@ -41,7 +43,12 @@ App.Popover = Ember.View.extend({
 
 App.TodoItem = Ember.View.extend({
 	title: null,
-	content: null
+	content: null,
+	classNames: ["row-fluid", "tall-row", "todoItem"],
+
+	mouseEnter: function() {
+		this.get('controller').set('popoverContent', this.content.content);
+	}
 });
 
 App.InputField = Ember.TextField.extend({
@@ -73,6 +80,9 @@ App.TodoDetail = Ember.View.extend({
 // CONTROLLER
 
 App.ApplicationController = Ember.Controller.extend({
+	LOG_TRANSITIONS: true,
+	popoverContent: 'this is the popover content',
+
 	init: function() {
 		for(x = 0; x < 5; x++) {
 			App.TodoItems.addTodo("TODO "+x, "Content "+x+" - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tempor sem.");
