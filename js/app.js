@@ -4,11 +4,6 @@ window.App = Ember.Application.create();
 
 // MODEL
 
-App.TodoItem = Ember.View.extend({
-	title: null,
-	content: null
-});
-
 App.TodoItems = Ember.ArrayController.create({
 	items: [],
 
@@ -23,6 +18,23 @@ App.TodoItems = Ember.ArrayController.create({
 
 // VIEW
 
+App.TodoItem = Ember.View.extend({
+	title: null,
+	content: null,
+	classNames: ["row-fluid", "tall-row", "todoItem"],
+
+	didInsertElement: function() {
+		this.$().popover({
+			html: true,
+			title: self.title,
+			placement: "left",
+			trigger: "hover",
+			title: this.title.content,
+			content: this.content.content
+		});
+	}
+});
+
 App.InputField = Ember.TextField.extend({
 	didInsertElement: function() {
 		this.$().focus();
@@ -35,17 +47,17 @@ App.TodoDetail = Ember.View.extend({
 	isEditing: false,
 
 	doubleClick: function() {
-		this.set('isEditing', true);
+		this.set("isEditing", true);
 	},
 
 	keyUp: function(e) {
 		if(e.keyCode == 13) {
-			this.set('isEditing', false);
+			this.set("isEditing", false);
 		}
 	},
 
 	focusOut: function() {
-		this.set('isEditing', false);
+		this.set("isEditing", false);
 	}
 });
 
@@ -64,7 +76,7 @@ App.ApplicationController = Ember.Controller.extend({
 	},
 
 	modifyTodo: function(todoItem) {
-		todoItem.set('modifiable', !todoItem.modifiable);
+		todoItem.set("modifiable", !todoItem.modifiable);
 	},
 
 	removeTodo: function(todoItem) {
