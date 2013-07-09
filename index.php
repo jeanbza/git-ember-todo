@@ -17,7 +17,7 @@
 		{{view App.Popover parentSelector=".popoverButton" contentSelector=".popover-content" }}
 
 		<div class="popover-content" style="display:none" >
-			My popover.
+			My popover
 		</div>
 
 		<div class="container-fluid">
