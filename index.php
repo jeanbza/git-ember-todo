@@ -13,8 +13,6 @@
 </head>
 <body>
 	<script type="text/x-handlebars">
-	TEST BRANCH
-
 		<div class="container-fluid">
 			<div class="row-fluid">
 				<div class="span12">
