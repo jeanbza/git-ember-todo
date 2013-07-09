@@ -18,36 +18,20 @@ App.TodoItems = Ember.ArrayController.create({
 
 // VIEW
 
-App.Popover = Ember.View.extend({
-	parentSelector: '',
-	contentSelector: '',
-
-	didInsertElement: function () {
-		var self = this;
-		$(self.parentSelector).popover({
-			html: true,
-			title: self.title,
-			placement: 'left',
-			trigger: 'hover',
-			content: function() {
-				var $content = $(self.contentSelector);
-				return $content.html();
-			}
-		});
-	},
-
-	close: function() {
-		$(this.parentSelector).popover('hide');
-	}
-});
-
 App.TodoItem = Ember.View.extend({
 	title: null,
 	content: null,
 	classNames: ["row-fluid", "tall-row", "todoItem"],
 
-	mouseEnter: function() {
-		this.get('controller').set('popoverContent', this.content.content);
+	didInsertElement: function() {
+		this.$().popover({
+			html: true,
+			title: self.title,
+			placement: "left",
+			trigger: "hover",
+			title: this.title.content,
+			content: this.content.content
+		});
 	}
 });
 
@@ -63,26 +47,23 @@ App.TodoDetail = Ember.View.extend({
 	isEditing: false,
 
 	doubleClick: function() {
-		this.set('isEditing', true);
+		this.set("isEditing", true);
 	},
 
 	keyUp: function(e) {
 		if(e.keyCode == 13) {
-			this.set('isEditing', false);
+			this.set("isEditing", false);
 		}
 	},
 
 	focusOut: function() {
-		this.set('isEditing', false);
+		this.set("isEditing", false);
 	}
 });
 
 // CONTROLLER
 
 App.ApplicationController = Ember.Controller.extend({
-	LOG_TRANSITIONS: true,
-	popoverContent: 'this is the popover content',
-
 	init: function() {
 		for(x = 0; x < 5; x++) {
 			App.TodoItems.addTodo("TODO "+x, "Content "+x+" - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tempor sem.");
@@ -95,7 +76,7 @@ App.ApplicationController = Ember.Controller.extend({
 	},
 
 	modifyTodo: function(todoItem) {
-		todoItem.set('modifiable', !todoItem.modifiable);
+		todoItem.set("modifiable", !todoItem.modifiable);
 	},
 
 	removeTodo: function(todoItem) {

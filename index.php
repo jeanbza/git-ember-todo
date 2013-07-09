@@ -12,15 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
-	<script type="text/x-handlebars" name="popover" data-template-name="popover-content">
-		<div class="popover-content" style="display:none">
-			{{popoverContent}}
-		</div>
-	</script>
-
 	<script type="text/x-handlebars">
-		{{view App.Popover templateName="popover-content" parentSelector=".todoItem" contentSelector=".popover-content"}}
-
 		<div class="container-fluid">
 			<div class="row-fluid">
 				<div class="span12">
