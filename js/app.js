@@ -4,11 +4,6 @@ window.App = Ember.Application.create();
 
 // MODEL
 
-App.TodoItem = Ember.View.extend({
-	title: null,
-	content: null
-});
-
 App.TodoItems = Ember.ArrayController.create({
 	items: [],
 
@@ -22,6 +17,32 @@ App.TodoItems = Ember.ArrayController.create({
 });
 
 // VIEW
+
+App.Popover = Ember.View.extend({
+	parentSelector: '',
+	contentSelector: '',
+	didInsertElement: function () {
+		var self = this;
+		$(self.parentSelector).popover({
+			html: true,
+			title: self.title,
+			placement: 'right',
+			trigger: 'hover',
+			content: function() {
+				var $content = $(self.contentSelector);
+				return $content.html();
+			}
+		});
+	},
+	close: function() {
+		$(this.parentSelector).popover('hide');
+	}
+});
+
+App.TodoItem = Ember.View.extend({
+	title: null,
+	content: null
+});
 
 App.InputField = Ember.TextField.extend({
 	didInsertElement: function() {

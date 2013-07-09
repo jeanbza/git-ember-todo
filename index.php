@@ -13,6 +13,13 @@
 </head>
 <body>
 	<script type="text/x-handlebars">
+		<button class='btn popoverButton'>Popover!</button>
+		{{view App.Popover parentSelector=".popoverButton" contentSelector=".popover-content" }}
+
+		<div class="popover-content" style="display:none" >
+			My popover.
+		</div>
+
 		<div class="container-fluid">
 			<div class="row-fluid">
 				<div class="span12">
