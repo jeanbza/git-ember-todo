@@ -26,6 +26,19 @@ App.TodoItem = Ember.View.extend({
 	classNames: ["row-fluid", "tall-row", "todoItem"],
 
 	didInsertElement: function() {
+		this.attachPopover();
+	},
+
+	titleChanged: function() {
+		this.attachPopover();
+	}.observes('title.content'),
+
+	contentChanged: function() {
+		this.attachPopover();
+	}.observes('content.content'),
+
+	attachPopover: function() {
+		this.$().popover('destroy');
 		this.$().popover({
 			html: true,
 			title: self.title,
