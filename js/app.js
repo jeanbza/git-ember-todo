@@ -105,7 +105,7 @@ App.ApplicationController = Ember.Controller.extend({
 // 		  we would use the DB and a DS.Store. For the sake of simplicity, we will skip that for now
 
 /**
- * This controller holds our todo item views and knows how to add more. It basically acts as our 'pseudo-model'
+ * This controller holds our todo item views and knows how to add more
  * @param {array} items Our 'model' - an array of views
  */
 App.TodoItems = Ember.ArrayController.create({
