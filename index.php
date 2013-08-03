@@ -28,34 +28,36 @@
 			</div>
 
 			{{#each todoItem in App.TodoItems.items}}
-				{{#view todoItem}}
-					<div class="span3 leftmost-span">
-						{{#view todoItem.title}}
-							{{#if todoItem.title.isEditing}}
-								{{view App.InputField valueBinding="todoItem.title.content" class="edit-todo-input"}}
-							{{else}}
-								{{todoItem.title.content}}
-							{{/if}}
-						{{/view}}
-					</div>
-
-					<div class="span8">
-						{{#view todoItem.content}}
-							{{#if todoItem.content.isEditing}}
-								{{view App.InputField valueBinding="todoItem.content.content" class="edit-todo-input"}}
-							{{else}}
-								{{todoItem.content.content}}
-							{{/if}}
-						{{/view}}
-					</div>
-
-					<div class="span1 right-align">
-						<button {{action removeTodo todoItem}}>
-							<i class="icon-trash"></i>
-						</button>
-					</div>
-				{{/view}}
+				{{view todoItem}}
 			{{/each}}
+		</div>
+	</script>
+
+	<script type="text/x-handlebars" data-template-name="todo-item">
+		<div class="span3 leftmost-span">
+			{{#view todoItem.title}}
+				{{#if todoItem.title.isEditing}}
+					{{view App.InputField valueBinding="todoItem.title.content" class="edit-todo-input"}}
+				{{else}}
+					{{todoItem.title.content}}
+				{{/if}}
+			{{/view}}
+		</div>
+
+		<div class="span8">
+			{{#view todoItem.content}}
+				{{#if todoItem.content.isEditing}}
+					{{view App.InputField valueBinding="todoItem.content.content" class="edit-todo-input"}}
+				{{else}}
+					{{todoItem.content.content}}
+				{{/if}}
+			{{/view}}
+		</div>
+
+		<div class="span1 right-align">
+			<button {{action removeTodo todoItem}}>
+				<i class="icon-trash"></i>
+			</button>
 		</div>
 	</script>
 </body>

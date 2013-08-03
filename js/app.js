@@ -2,7 +2,7 @@
 
 window.App = Ember.Application.create();
 
-// MODEL
+// MODEL (Note: This may not be the best way to represent your model. Your mileage may vary)
 
 App.TodoItems = Ember.ArrayController.create({
 	items: [],
@@ -19,6 +19,8 @@ App.TodoItems = Ember.ArrayController.create({
 // VIEW
 
 App.TodoItem = Ember.View.extend({
+	templateName: 'todo-item',
+
 	title: null,
 	content: null,
 	classNames: ["row-fluid", "tall-row", "todoItem"],
