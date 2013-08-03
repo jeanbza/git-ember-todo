@@ -2,14 +2,18 @@
 
 window.App = Ember.Application.create();
 
-// MODEL (Note: This may not be the best way to represent your model. Your mileage may vary)
+// MODEL
 
+/**
+ * This controller holds our todo item views and knows how to add more. It basically acts as our 'pseudo-model'
+ * @param {array} items Our 'model' - an array of views
+ */
 App.TodoItems = Ember.ArrayController.create({
 	items: [],
 
 	addTodo: function(title, content) {
-		var tempTitle = App.TodoDetail.create({content: title});
-		var tempContent = App.TodoDetail.create({content: content});
+		var tempTitle = App.TodoDetail.create({textContent: title});
+		var tempContent = App.TodoDetail.create({textContent: content});
 		var tempTodo = App.TodoItem.create({title: tempTitle, content: tempContent});
 
 		this.items.pushObject(tempTodo);
@@ -18,6 +22,13 @@ App.TodoItems = Ember.ArrayController.create({
 
 // VIEW
 
+/**
+ * This is a todo item view
+ * @param {string}     templateName	Tells ember which template to render into
+ * @param {TodoDetail} title        The title (view) of our todo item
+ * @param {TodoDetail} content      The content (view) of our todo item
+ * @param {array}      classNames   An array of strings that ember will assign as classnames to this view's DOM element
+ */
 App.TodoItem = Ember.View.extend({
 	templateName: 'todo-item',
 
@@ -31,11 +42,11 @@ App.TodoItem = Ember.View.extend({
 
 	titleChanged: function() {
 		this.attachPopover();
-	}.observes('title.content'),
+	}.observes('title.textContent'),
 
 	contentChanged: function() {
 		this.attachPopover();
-	}.observes('content.content'),
+	}.observes('content.textContent'),
 
 	attachPopover: function() {
 		this.$().popover('destroy');
@@ -44,20 +55,23 @@ App.TodoItem = Ember.View.extend({
 			title: self.title,
 			placement: "left",
 			trigger: "hover",
-			title: this.title.content,
-			content: this.content.content
+			title: this.title.textContent,
+			content: this.content.textContent
 		});
 	}
 });
 
-App.InputField = Ember.TextField.extend({
-	didInsertElement: function() {
-		this.$().focus();
-	}
-});
-
+/**
+ * An individual detail about a todo item. We want this because different parts of our todo item will act differently 
+ * (e.g. double clicking delete icon is not the same as clicking the todo title) and independently (e.g. I should
+ * be able to double click and edit the title independently of the content)
+ * @param {string}  textContent The text content of this part of the todo item (e.g. title's text, content's text)
+ * @param {string}  tagName     The tagname ember will assign to this view
+ * @param {boolean} isEditing   A boolean in charge of keeping track of whether this view is being edited (by user double 
+ *                              click) or not
+ */
 App.TodoDetail = Ember.View.extend({
-	content: "",
+	textContent: "",
 	tagName: "div",
 	isEditing: false,
 
@@ -76,8 +90,17 @@ App.TodoDetail = Ember.View.extend({
 	}
 });
 
+App.InputField = Ember.TextField.extend({
+	didInsertElement: function() {
+		this.$().focus();
+	}
+});
+
 // CONTROLLER
 
+/**
+ * Controller mostly in charge of modifying the model
+ */
 App.ApplicationController = Ember.Controller.extend({
 	init: function() {
 		for(x = 0; x < 5; x++) {

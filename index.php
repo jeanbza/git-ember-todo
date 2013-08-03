@@ -37,9 +37,9 @@
 		<div class="span3 leftmost-span">
 			{{#view todoItem.title}}
 				{{#if todoItem.title.isEditing}}
-					{{view App.InputField valueBinding="todoItem.title.content" class="edit-todo-input"}}
+					{{view App.InputField valueBinding="todoItem.title.textContent" class="edit-todo-input"}}
 				{{else}}
-					{{todoItem.title.content}}
+					{{todoItem.title.textContent}}
 				{{/if}}
 			{{/view}}
 		</div>
@@ -47,9 +47,9 @@
 		<div class="span8">
 			{{#view todoItem.content}}
 				{{#if todoItem.content.isEditing}}
-					{{view App.InputField valueBinding="todoItem.content.content" class="edit-todo-input"}}
+					{{view App.InputField valueBinding="todoItem.content.textContent" class="edit-todo-input"}}
 				{{else}}
-					{{todoItem.content.content}}
+					{{todoItem.content.textContent}}
 				{{/if}}
 			{{/view}}
 		</div>
