@@ -99,7 +99,7 @@ App.InputField = Ember.TextField.extend({
 // CONTROLLER
 
 /**
- * Controller mostly in charge of modifying the model
+ * Controller which is mostly in charge of modifying the model
  */
 App.ApplicationController = Ember.Controller.extend({
 	init: function() {
