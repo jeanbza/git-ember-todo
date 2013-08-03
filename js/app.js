@@ -2,24 +2,6 @@
 
 window.App = Ember.Application.create();
 
-// MODEL
-
-/**
- * This controller holds our todo item views and knows how to add more. It basically acts as our 'pseudo-model'
- * @param {array} items Our 'model' - an array of views
- */
-App.TodoItems = Ember.ArrayController.create({
-	items: [],
-
-	addTodo: function(title, content) {
-		var tempTitle = App.TodoDetail.create({textContent: title});
-		var tempContent = App.TodoDetail.create({textContent: content});
-		var tempTodo = App.TodoItem.create({title: tempTitle, content: tempContent});
-
-		this.items.pushObject(tempTodo);
-	}
-});
-
 // VIEW
 
 /**
@@ -100,13 +82,10 @@ App.InputField = Ember.TextField.extend({
 
 /**
  * Controller which is mostly in charge of modifying the model
+ * @param {string} todoInput The valueBinding location which the giant Add A Todo input box targets
  */
 App.ApplicationController = Ember.Controller.extend({
-	init: function() {
-		for(x = 0; x < 5; x++) {
-			App.TodoItems.addTodo("TODO "+x, "Content "+x+" - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tempor sem.");
-		}
-	},
+	todoInput: "",
 
 	addTodo: function() {
 		App.TodoItems.addTodo(this.get("todoInput"), "No content.");
@@ -119,5 +98,30 @@ App.ApplicationController = Ember.Controller.extend({
 
 	removeTodo: function(todoItem) {
 		App.TodoItems.items.removeObject(todoItem);
+	}
+});
+
+// MODEL: Please note, in a real world application our model would probably not be represented as such - instead,
+// 		  we would use the DB and a DS.Store. For the sake of simplicity, we will skip that for now
+
+/**
+ * This controller holds our todo item views and knows how to add more. It basically acts as our 'pseudo-model'
+ * @param {array} items Our 'model' - an array of views
+ */
+App.TodoItems = Ember.ArrayController.create({
+	items: [],
+
+	init: function() {
+		for(x = 0; x < 5; x++) {
+			this.addTodo("TODO "+x, "Content "+x+" - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sit amet tempor sem.");
+		}
+	},
+
+	addTodo: function(title, content) {
+		var tempTitle = App.TodoDetail.create({textContent: title});
+		var tempContent = App.TodoDetail.create({textContent: content});
+		var tempTodo = App.TodoItem.create({title: tempTitle, content: tempContent});
+
+		this.items.pushObject(tempTodo);
 	}
 });
